@@ -83,10 +83,20 @@ require_once "lib/Database.php";
 		</div>
 	</div>
 <div class="navsection templete">
+<?php
+	$readpage="select * from tbl_page";
+	$pagedata=$DB->select($readpage);
+
+
+?>
 	<ul>
-		<li><a id="active" href="index.php">Home</a></li>
-		<li><a href="about.php">About</a></li>	
-		<li><a href="contact.php">Contact</a></li>
+
+		<li><a href="index.php">Home</a></li>
+		<?php foreach ($pagedata as $pagemenu) {?>
+			<li><a href="page.php?id=<?php echo  $pagemenu['page_id']; ?>"><?php echo  $pagemenu['page_title']; ?></a></li>
+		<?php }?>
+		
+		
 		<li><a href="admin/index.php">Login/register</a></li>
 	</ul>
 </div>

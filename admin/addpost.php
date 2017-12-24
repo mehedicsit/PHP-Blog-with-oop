@@ -1,41 +1,5 @@
 ﻿<?php include "inc/header.php" ;?>
-        <div class="clear">
-        </div>
-        <div class="grid_2">
-            <div class="box sidemenu">
-                <div class="block" id="section-menu">
-                    <ul class="section menu">
-						<li><a class="menuitem">Site Option</a>
-                            <ul class="submenu">
-                                <li><a href="titleslogan.php">Title & Slogan</a></li>
-                                <li><a href="social.php">Social Media</a></li>
-                                <li><a href="copyright.php">Copyright</a></li>
-                                
-                            </ul>
-                        </li>
-						
-                         <li><a class="menuitem">Update Pages</a>
-                            <ul class="submenu">
-                                <li><a>About Us</a></li>
-                                <li><a>Contact Us</a></li>
-                            </ul>
-                        </li>
-                        <li><a class="menuitem">Category Option</a>
-                            <ul class="submenu">
-                                 <li><a href="addcat.php">Add Category</a> </li>
-                                <li><a href="catlist.php">Category List</a> </li>
-                            </ul>
-                        </li>
-                        <li><a class="menuitem">Post Option</a>
-                            <ul class="submenu">
-                                <li><a href="addpost.php">Add Post</a> </li>
-                                <li><a href="postlist.php">Post List</a> </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+        
         <div class="grid_10">
 		
             <div class="box round first grid">
@@ -43,13 +7,11 @@
                 <div class="block"> 
                 <?php 
                     $DB=new Database();
-                    $logged_user_id=0;
-
                     if(isset($_POST['submit'])){
                         $posttitle=$_POST['posttitle'];
                         $postcontent=$_POST['postcontent'];
                         $catname=$_POST['catlist'];
-                        $logged_user_id=$_POST['loggeduserid'];
+                        (isset($_POST['loggeduserid'])? $logged_user_id=$_POST['loggeduserid'] :'value not set yet');
                         $insertpostq="insert into tbl_post(title,content,cat_id,user_id) values('$posttitle','$postcontent','$catname','$logged_user_id')";
 
                         $insrtpost=$DB->insert($insertpostq);
@@ -107,19 +69,19 @@
                             </td>
                         </tr>
                         <?php 
-                             $sessionuser=$_SESSION['username'];
+                            $sessionuser=$_SESSION['username'];
                             $isuserloggedinquery="select user_id from tbl_user where username='$sessionuser'";
                             $loggeduser= $DB->select($isuserloggedinquery);
                            
                         ?>
-                        <?php if(is_array($loggeduser)){ foreach ($loggeduser as $luser) {?>
+                        <?php  foreach ($loggeduser as $luser) {?>
                         <tr>
                             <td class="logged-in-user">
-                                 <input type="hidden" name="loggeduserid" value="<?php echo $luser['user_id'] ?>" />
+                                 <input type="hidden" name="loggeduserid" value="<?php echo  $luser['user_id'] ?>" />
                             </td>
                         </tr>
                        
-                        <?php }} ?>
+                        <?php } ?>
 						<tr>
                             <td></td>
                             <td>

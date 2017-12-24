@@ -1,13 +1,14 @@
-﻿<?php include "inc/header.php" ;?>
-       
+<?php include "inc/header.php" ;?>
+        
         <div class="grid_10">
             <?php 
                 $DB=new Database();
                 if(isset($_POST['submit'])){
-                    $insertcat=$_POST['catname'];
-                    $catquery="insert into tbl_category(catname) values('$insertcat')";
+                    $pagetitle=$_POST['pagetitle'];
+                    $pagecontent=$_POST['pagecontent'];
+                    $pagequery="insert into tbl_page(page_title,page_content) values('$pagetitle','$pagecontent')";
                     
-                    $insertcat=$DB->insert($catquery);
+                    $insertpage=$DB->insert($pagequery);
 
                 }
             
@@ -21,7 +22,12 @@
                     <table class="form">					
                         <tr>
                             <td>
-                                <input type="text" placeholder="Enter Category Name..." class="medium" name="catname" />
+                                <input type="text" placeholder="Enter Page Title" class="medium" name="pagetitle" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <textarea name="pagecontent" id="addpage" cols="30" rows="10">Please add page content here</textarea>
                             </td>
                         </tr>
 						<tr> 
