@@ -7,12 +7,38 @@
                 <div class="block"> 
                 <?php 
                     $DB=new Database();
+                    
                     if(isset($_POST['submit'])){
+                        //image upload part
+                        if(isset($_FILES["files"]) && $_FILES["files"]["error"] == 0){
+                         $allowed = array("jpg" => "image/jpg", "jpeg" => "image/jpeg", "gif" => "image/gif", "png" => "image/png");
+                        $imgname=$_FILES['files']['name'];
+                        $imgtype=$_FILES['files']['type'];
+                        $imgsize=$_FILES['files']['size'];
+                        $tempname=$_FILES['files']['tmp_name'];
+
+                    // Verify file extension
+                        $ext = pathinfo($imgname, PATHINFO_EXTENSION);
+                        if(!array_key_exists($ext, $allowed)) die("Error: Please select a valid file format.");
+                        $detination="upload/$imgname";
+                        //check image duplicacy 
+                            /* if(file_exists($detination)){
+                                echo die($imgname . " is already exists.");
+                            } else{ */
+                                move_uploaded_file($tempname,$detination);
+                            //}
+                        
+                        }
+                        // Verify file size - 5MB maximum
+                        $maxsize = 1 * 1024 * 1024;
+                        if($imgsize > $maxsize) die("Error: File size is larger than the allowed limit.");
+                        //image upload part
                         $posttitle=$_POST['posttitle'];
                         $postcontent=$_POST['postcontent'];
                         $catname=$_POST['catlist'];
                         (isset($_POST['loggeduserid'])? $logged_user_id=$_POST['loggeduserid'] :'value not set yet');
-                        $insertpostq="insert into tbl_post(title,content,cat_id,user_id) values('$posttitle','$postcontent','$catname','$logged_user_id')";
+                        
+                        $insertpostq="insert into tbl_post(title,content,cat_id,user_id,image) values('$posttitle','$postcontent','$catname','$logged_user_id','$detination')";
 
                         $insrtpost=$DB->insert($insertpostq);
                     }
@@ -65,7 +91,7 @@
                                 <label>Upload Image</label>
                             </td>
                             <td>
-                                <input type="file" name="feature-image" />
+                                <input type="file" name="files" />
                             </td>
                         </tr>
                         <?php 

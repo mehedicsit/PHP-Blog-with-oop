@@ -26,7 +26,7 @@
 
 
 					?>
-					<?php foreach($postlist as $postres){?>
+					<?php if(is_array($postlist) || is_object($postlist)){foreach($postlist as $postres){?>
 						<tr class="odd gradeX">
 							<td><?php echo $postres['title'] ?></td>
 							<td><?php echo $helper->excerpt($postres['content'],0,100); ?></td>
@@ -34,7 +34,7 @@
 							<td class="center"> <?php echo $postres['image'] ?></td>
 							<td><a href="edit-post.php?id=<?php echo $postres['post_id'] ?>">Edit</a> || <a href="delete-post.php?id=<?php echo $postres['post_id'] ?>">Delete</a></td>
 						</tr>
-					<?php }?>	
+					<?php }}?>	
 					</tbody>
 				</table>
 	

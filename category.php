@@ -1,5 +1,4 @@
 <?php include "inc/header.php" ?>
-<?php include "helpers/Structure-post.php"; ?>
 <?php 
 	if(isset($_GET['id'])){
 		$singlepostid=$_GET['id'];
@@ -10,7 +9,7 @@
 		WHERE tbl_post.cat_id=tbl_category.cat_id AND tbl_post.user_id=tbl_user.user_id AND tbl_category.cat_id='$singlepostid'";
 		$singpost=$DB->select($singlepostquery);
 	}
-	$helper=new sturcturePost(); 
+
 
 ?>
 	<div class="contentsection contemplete clear">
@@ -22,8 +21,8 @@
 				<?php if (is_array($singpost) || is_object($singpost)) { foreach ($singpost as $spost) {?>
 					<div class="category-single">
 						<h2><a href="post.php?id=<?php echo $spost['post_id']; ?>"><?php echo $spost['title']; ?></a></h2>
-						<h4><?php echo $helper->dateFormat($spost['dates']); ?>, By <a href="author.php?id=<?php echo $spost['user_id']; ?>"><?php echo $spost['username']; ?></a></h4>
-						<img src="images/<?php echo $spost['image']; ?>" alt="MyImage"/>
+						<h4><?php echo $p_format->dateFormat($spost['dates']); ?>, By <a href="author.php?id=<?php echo $spost['user_id']; ?>"><?php echo $spost['username']; ?></a></h4>
+						<img src="admin/<?php echo $spost['image']; ?>" alt="MyImage"/>
 						<p><?php echo $spost['content']; ?></p>
 					</div>
 				<?php 	} }else{ echo "nothing match result";}?>
@@ -40,7 +39,7 @@
 					<h2>Related articles</h2>
 					<?php if(is_array($relatedpost)|| is_object($relatedpost)){ foreach ($relatedpost as $rlres) {?>
 					
-					<a href="post.php?id=<?php echo $rlres['post_id']; ?>"><img src="images/<?php echo $rlres['image']; ?>" alt="post image"/></a>
+					<a href="post.php?id=<?php echo $rlres['post_id']; ?>"><img src="admin/<?php echo $rlres['image']; ?>" alt="post image"/></a>
 
 					<?php } }?>
 				</div>

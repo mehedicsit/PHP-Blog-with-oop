@@ -1,5 +1,4 @@
 <?php include "inc/header.php" ?>
-<?php include "helpers/Structure-post.php"; ?>
 <?php 
 	if(isset($_GET['id'])){
 		$singlepostid=$_GET['id'];
@@ -10,7 +9,6 @@
 		where post_id='$singlepostid' and(tbl_user.user_id=tbl_post.user_id)";
 		$singpost=$DB->select($singlepostquery);
 	}
-	$helper=new sturcturePost(); 
 
 ?>
 	<div class="contentsection contemplete clear">
@@ -21,8 +19,8 @@
 
 				<?php if (is_array($singpost) || is_object($singpost)) { foreach ($singpost as $spost) {?>
 					<h2><?php echo $spost['title']; ?></h2>
-						<h4><?php echo $helper->dateFormat($spost['dates']); ?>, By <a href="author.php?id=<?php echo $spost['user_id']; ?>"><?php echo $spost['username']; ?></a></h4>
-					<img src="images/<?php echo $spost['image']; ?>" alt="MyImage"/>
+						<h4><?php echo $p_format->dateFormat($spost['dates']); ?>, By <a href="author.php?id=<?php echo $spost['user_id']; ?>"><?php echo $spost['username']; ?></a></h4>
+					<img src="admin/<?php echo $spost['image']; ?>" alt="MyImage"/>
 					<p><?php echo $spost['content']; ?></p>
 				<?php 	}}else{ echo "nothing match result";} ?>
 			<?php 
@@ -38,7 +36,7 @@
 					<h2>Related articles</h2>
 					<?php if (is_array($relatedpost) || is_object($relatedpost)) { foreach ($relatedpost as $rlres) {?>
 					
-					<a href="post.php?id=<?php echo $rlres['post_id']; ?>"><img src="images/<?php echo $rlres['image']; ?>" alt="post image"/></a>
+					<a href="post.php?id=<?php echo $rlres['post_id']; ?>"><img src="admin/<?php echo $rlres['image']; ?>" alt="post image"/></a>
 
 					<?php } }?>
 				</div>

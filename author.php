@@ -39,7 +39,7 @@
 					<h2>Related articles</h2>
 					<?php foreach ($relatedpost as $rlres) {?>
 					
-					<a href="post.php?id=<?php echo $rlres['post_id']; ?>"><img src="images/<?php echo $rlres['image']; ?>" alt="post image"/></a>
+					<a href="post.php?id=<?php echo $rlres['post_id']; ?>"><img src="admin/<?php echo $rlres['image']; ?>" alt="post image"/></a>
 
 					<?php } ?>
 				</div>

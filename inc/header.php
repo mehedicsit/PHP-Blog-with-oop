@@ -34,9 +34,10 @@
 	});
 	</script>
 </head>
+<?php include "helpers/Structure-post.php"; ?>
 <?php 
 require_once "lib/Database.php"; 
-
+$p_format= new sturcturePost();
        
         
         $DB= new Database();

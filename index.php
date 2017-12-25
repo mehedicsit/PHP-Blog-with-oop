@@ -1,12 +1,11 @@
 <?php include "lib/Database.php"; ?>
-<?php include "helpers/Structure-post.php"; ?>
 <?php include "inc/header.php" ?>
 <?php include "inc/slider.php" ?>
 <?php 
 //custom php start here
 
 	$DB=new Database();
-	$p_format= new sturcturePost();
+	
 	//start pagination
 
 
@@ -34,7 +33,7 @@
 			<div class="samepost clear">
 				<h2><a href="post.php?id=<?php echo $P_result['post_id']; ?>"><?php echo $P_result['title']; ?></a></h2>
 				<h4><?php echo $p_format->dateFormat($P_result['dates']); ?>, By <a href="author.php?id=<?php echo $P_result['user_id']; ?>"><?php echo $P_result['name']; ?></a></h4>
-				 <a href="post.php?id=<?php echo $P_result['post_id']; ?>"><img src="admin/upload/<?php echo $P_result['image']; ?>" alt="post image"/></a>
+				 <a href="post.php?id=<?php echo $P_result['post_id']; ?>"><img src="admin/<?php echo $P_result['image']; ?>" alt="post image"/></a>
 				<p>
 					<?php echo $p_format->excerpt($P_result['content'],0,250); ?>
 				</p>

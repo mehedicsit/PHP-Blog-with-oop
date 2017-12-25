@@ -33,7 +33,7 @@
 				<?php foreach($newpost as $reposres){ ?>
 					<div class="popular clear">
 						<h3><a href="post.php?id=<?php echo  $reposres['post_id'];?>"><?php echo  $reposres['title']?></a></h3>
-						<a href="post.php?id=<?php echo  $reposres['post_id'];?>"><img src="images/<?php echo  $reposres['image']?>" alt="post image"/></a>
+						<a href="post.php?id=<?php echo  $reposres['post_id'];?>"><img src="admin/<?php echo  $reposres['image']?>" alt="post image"/></a>
 						<p><?php echo $p_format->excerpt( $reposres['content'],0,150);?></p>	
 					</div>
 				<?php }?>	
