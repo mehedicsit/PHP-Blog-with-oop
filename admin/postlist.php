@@ -23,6 +23,13 @@
 						$DB=new Database();
 						$postlist=$DB->select($postq);
 						$helper=new sturcturePost();
+						//delete post
+						// if(isset($_GET['id'])){
+						// 	$dlpostid=$_GET['id'];
+						// 	$delete="delete from tbl_post where post_id='$dlpostid'";
+						// 	$deleteres=$DB->delete($delete);
+						// }
+					
 
 
 					?>
@@ -32,7 +39,7 @@
 							<td><?php echo $helper->excerpt($postres['content'],0,100); ?></td>
 							<td><?php echo $postres['catname'] ?></td>
 							<td class="center"> <?php echo $postres['image'] ?></td>
-							<td><a href="edit-post.php?id=<?php echo $postres['post_id'] ?>">Edit</a> || <a href="delete-post.php?id=<?php echo $postres['post_id'] ?>">Delete</a></td>
+							<td><a href="edit-post.php?id=<?php echo $postres['post_id'] ?>">Edit</a> || <a href="delete.php?id=<?php echo $postres['post_id'] ?>">Delete</a></td>
 						</tr>
 					<?php }}?>	
 					</tbody>
