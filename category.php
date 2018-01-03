@@ -23,7 +23,7 @@
 						<h2><a href="post.php?id=<?php echo $spost['post_id']; ?>"><?php echo $spost['title']; ?></a></h2>
 						<h4><?php echo $p_format->dateFormat($spost['dates']); ?>, By <a href="author.php?id=<?php echo $spost['user_id']; ?>"><?php echo $spost['username']; ?></a></h4>
 						<img src="admin/<?php echo $spost['image']; ?>" alt="MyImage"/>
-						<p><?php echo $spost['content']; ?></p>
+						<p><?php echo html_entity_decode($spost['content']); ?></p>
 					</div>
 				<?php 	} }else{ echo "nothing match result";}?>
 			<?php 

@@ -7,7 +7,6 @@
                 <div class="block"> 
                 <?php 
                     $DB=new Database();
-                    
                         if(isset($_GET['id'])){
                         $editid=$_GET['id'];
                         $editq="select * from tbl_post where post_id='$editid'";
@@ -15,7 +14,10 @@
                         }
 
                     ?>
-                 <form action="<?php echo $_SERVER['PHP_SELF']?>" method="post" enctype="multipart/form-data">
+
+                
+
+                 <form action="<?php echo urlencode('update-post.php'); ?>" method="post" enctype="multipart/form-data">
                     <table class="form">
                        <?php if(is_array($editpost)|| is_object($editpost)){foreach ($editpost as $posttitle) {?>
                          
@@ -83,8 +85,8 @@
 						<tr>
                             <td></td>
                             <td>
-                                <input type="submit" name="submit" Value="Save" />
-                            </td>
+                                <input type="hidden" name="id" value="<?php echo $editid; ?>">
+                               <input type="submit" name="submit" Value="Save" />
                         </tr>
                     </table>
                     </form>
@@ -96,48 +98,6 @@
     </div>
     <div class="clear">
     </div>
-    <?php
-//post update here
-                    
-                    if (isset($_REQUEST['submit'])) {
-                        if(isset($_REQUEST['id'])){
-                        $updatepostid=$_REQUEST['id'];
-                        }
-                        $title=$_REQUEST['posttitle'];
-                        $cat=$_REQUEST['catlist'];
-                        $content=$_REQUEST['postcontent'];
-                         //image upload part
-                        if(isset($_FILES["files"]) && $_FILES["files"]["error"] == 0){
-                         $allowed = array("jpg" => "image/jpg", "jpeg" => "image/jpeg", "gif" => "image/gif", "png" => "image/png");
-                        $imgname=$_FILES['files']['name'];
-                        $imgtype=$_FILES['files']['type'];
-                        $imgsize=$_FILES['files']['size'];
-                        $tempname=$_FILES['files']['tmp_name'];
-
-                    // Verify file extension
-                        $ext = pathinfo($imgname, PATHINFO_EXTENSION);
-                        if(!array_key_exists($ext, $allowed)) die("Error: Please select a valid file format.");
-                        $detination="upload/$imgname";
-                        //check image duplicacy 
-                            /* if(file_exists($detination)){
-                                echo die($imgname . " is already exists.");
-                            } else{ */
-                                move_uploaded_file($tempname,$detination);
-                            //}
-                        
-                        }
-                        // Verify file size - 5MB maximum
-                        $maxsize = 1 * 1024 * 1024;
-                        if($imgsize > $maxsize) die("Error: File size is larger than the allowed limit.");
-                        //image upload part
-
-                        //update query
-                        $updatepostquery="update tbl_post set title='$title',content='$content',cat_id='$cat',image='$detination' where post_id='$updatepostid'";
-                        $updatepost=$DB->update($updatepostquery);
-                    }
-
-                ?>              
-
-
+    
 
     <?php include "inc/footer.php";?>

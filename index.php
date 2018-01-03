@@ -35,7 +35,7 @@
 				<h4><?php echo $p_format->dateFormat($P_result['dates']); ?>, By <a href="author.php?id=<?php echo $P_result['user_id']; ?>"><?php echo $P_result['name']; ?></a></h4>
 				 <a href="post.php?id=<?php echo $P_result['post_id']; ?>"><img src="admin/<?php echo $P_result['image']; ?>" alt="post image"/></a>
 				<p>
-					<?php echo $p_format->excerpt($P_result['content'],0,250); ?>
+					<?php echo $p_format->excerpt(html_entity_decode($P_result['content']),0,250); ?>
 				</p>
 				<div class="readmore clear">
 					<a href="post.php?id=<?php echo $P_result['post_id']; ?>">Read More</a>

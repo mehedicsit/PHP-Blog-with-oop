@@ -34,7 +34,7 @@
                         if($imgsize > $maxsize) die("Error: File size is larger than the allowed limit.");
                         //image upload part
                         $posttitle=$_POST['posttitle'];
-                        $postcontent=$_POST['postcontent'];
+                        $postcontent=htmlentities($_POST['postcontent']);
                         $catname=$_POST['catlist'];
                         (isset($_POST['loggeduserid'])? $logged_user_id=$_POST['loggeduserid'] :'value not set yet');
                         
